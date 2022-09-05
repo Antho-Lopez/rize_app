@@ -8,9 +8,15 @@ class Trainings extends StatefulWidget {
 }
 
 class _TrainingsState extends State<Trainings> {
+
+  Map data = {};
+
   @override
   Widget build(BuildContext context) {
 
+    data = data.isNotEmpty ? data : ModalRoute.of(context)?.settings.arguments as Map;
+
+    const bgBlack = 0xff1C1C1C;
     const myBlue = 0xff145675;
     const triangleGrey = 0xff444444;
 
@@ -45,7 +51,7 @@ class _TrainingsState extends State<Trainings> {
                       children: const [
                         Flexible(
                           child: Text(
-                            'Your training',
+                            'Your trainings',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 26,
@@ -68,7 +74,7 @@ class _TrainingsState extends State<Trainings> {
                               child: Padding(
                                 padding: EdgeInsets.symmetric(vertical: 22, horizontal: 0),
                                 child: ListTile(
-                                  title: Text('Start training',
+                                  title: Text('Start add or edit a training !',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontSize: 22,
@@ -84,22 +90,60 @@ class _TrainingsState extends State<Trainings> {
                       ],
                     ),
                     const SizedBox(height: 30),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Flexible(
-                          child: Text(
-                            'Your training',
-                            style: TextStyle(
-                              fontSize: 18,
-                              letterSpacing: 2,
-                              color: Colors.white,
-                              fontFamily: 'AgrandirHeavy',
+
+                    ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: data['trainings'].length,
+                        itemBuilder: (context, index){
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 4),
+                            child: Card(
+                              child: ListTile(
+                                onTap:() {
+                                  Navigator.pushReplacementNamed(context, '/loading_training_show', arguments: {
+                                    'id': data['trainings'][index]['id'],
+                                  });
+                                },
+                                shape: const Border(
+                                  bottom: BorderSide(
+                                    color: Color(myBlue),
+                                    width: 3,
+                                  ),
+                                  top: BorderSide(
+                                    color: Color(myBlue),
+                                    width: 3,
+                                  ),
+                                  left: BorderSide(
+                                    color: Color(myBlue),
+                                    width: 3,
+                                  ),
+                                  right: BorderSide(
+                                    color: Color(myBlue),
+                                    width: 3,
+                                  ),
+                                ),
+                                tileColor: const Color(triangleGrey),
+                                title: Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 0),
+                                    child: Text(
+                                      data['trainings'][index]['title'],
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        letterSpacing: 2,
+                                        color: Colors.white,
+                                        fontFamily: 'AgrandirHeavy',
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
-                        )
-                      ],
+                          );
+                        }
                     ),
+
                     const SizedBox(height: 2),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -110,247 +154,8 @@ class _TrainingsState extends State<Trainings> {
                             padding: const EdgeInsets.all(8.0),
                             child: ElevatedButton(
                               style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(const Color(triangleGrey)),
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: const BorderSide(
-                                        color: Color(myBlue),
-                                        width: 2,
-                                      )
-                                  ),
-                                ),
-                              ),
-                              onPressed:() {
-                                Navigator.pushNamed(context, '/training_show');
-                              },
-                              child: Card(
-                                color: const Color(triangleGrey),
-                                elevation: 0,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 17, horizontal: 17),
-                                  child: Column(
-                                    children: const [
-                                      Text('Chest & Triceps',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirHeavy',
-                                        ),
-                                      ),
-                                      Text('Monday',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirLight',
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 2),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Flexible(
-                          fit: FlexFit.tight,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(const Color(triangleGrey)),
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: const BorderSide(
-                                        color: Color(myBlue),
-                                        width: 2,
-                                      )
-                                  ),
-                                ),
-                              ),
-                              onPressed:() {
-                                Navigator.pushNamed(context, '/training_show');
-                              },
-                              child: Card(
-                                color: const Color(triangleGrey),
-                                elevation: 0,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 17, horizontal: 17),
-                                  child: Column(
-                                    children: const [
-                                      Text('Back & Biceps',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirHeavy',
-                                        ),
-                                      ),
-                                      Text('Tuesday',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirLight',
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 2),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Flexible(
-                          fit: FlexFit.tight,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(const Color(triangleGrey)),
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: const BorderSide(
-                                        color: Color(myBlue),
-                                        width: 2,
-                                      )
-                                  ),
-                                ),
-                              ),
-                              onPressed:() {
-                                Navigator.pushNamed(context, '/training_show');
-                              },
-                              child: Card(
-                                color: const Color(triangleGrey),
-                                elevation: 0,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 17, horizontal: 17),
-                                  child: Column(
-                                    children: const [
-                                      Text('Shoulder & Legs',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirHeavy',
-                                        ),
-                                      ),
-                                      Text('Wednesday - Saturday',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirLight',
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 2),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Flexible(
-                          fit: FlexFit.tight,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(const Color(triangleGrey)),
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: const BorderSide(
-                                        color: Color(myBlue),
-                                        width: 2,
-                                      )
-                                  ),
-                                ),
-                              ),
-                              onPressed:() {
-                                Navigator.pushNamed(context, '/training_show');
-                              },
-                              child: Card(
-                                color: const Color(triangleGrey),
-                                elevation: 0,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 17, horizontal: 17),
-                                  child: Column(
-                                    children: const [
-                                      Text('Abdos',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirHeavy',
-                                        ),
-                                      ),
-                                      Text('Friday',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirLight',
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 2),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Flexible(
-                          fit: FlexFit.tight,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(const Color(myBlue)),
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: const BorderSide(
-                                        color: Color(myBlue),
-                                        width: 2,
-                                      )
-                                  ),
+                                backgroundColor: MaterialStateProperty.all<Color>(
+                                    const Color(myBlue)
                                 ),
                               ),
                               onPressed:() {
@@ -405,7 +210,7 @@ class _TrainingsState extends State<Trainings> {
                       icon: const Icon(Icons.directions_run),
                       color: const Color(myBlue),
                       iconSize: 30,
-                      onPressed: () {Navigator.pushNamed(context, '/trainings');},
+                      onPressed: () {Navigator.pushNamed(context, '/trainings_loading');},
                     ),
                     IconButton(
                       icon: const Icon(Icons.home),
@@ -415,7 +220,7 @@ class _TrainingsState extends State<Trainings> {
                     IconButton(
                       icon: const Icon(Icons.bed),
                       iconSize: 30,
-                      onPressed: () {Navigator.pushNamed(context, '/sleepings');},
+                      onPressed: () {Navigator.pushNamed(context, '/sleep_loading');},
                     ),
                     IconButton(
                       icon: const Icon(Icons.more_horiz),

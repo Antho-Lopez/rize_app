@@ -158,7 +158,7 @@ class _WeightState extends State<Weight> {
                                 ),
                               ),
                               onPressed:() {
-                                Navigator.pushNamed(context, '/edit_weight');
+                                Navigator.pushNamed(context, '/weight_edit_loading');
                               },
                               child: Card(
                                 color: const Color(myGreen),
@@ -273,7 +273,7 @@ class _WeightState extends State<Weight> {
                   IconButton(
                     icon: const Icon(Icons.directions_run),
                     iconSize: 30,
-                    onPressed: () {Navigator.pushNamed(context, '/trainings');},
+                    onPressed: () {Navigator.pushNamed(context, '/trainings_loading');},
                   ),
                   IconButton(
                     icon: const Icon(Icons.home),
@@ -284,7 +284,7 @@ class _WeightState extends State<Weight> {
                   IconButton(
                     icon: const Icon(Icons.bed),
                     iconSize: 30,
-                    onPressed: () {Navigator.pushNamed(context, '/sleepings');},
+                    onPressed: () {Navigator.pushNamed(context, '/sleep_loading');},
                   ),
                   IconButton(
                     icon: const Icon(Icons.more_horiz),

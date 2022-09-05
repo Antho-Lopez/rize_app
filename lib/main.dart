@@ -24,7 +24,11 @@ import 'package:rize_app/pages/training/sessions/show.dart';
 
 // LOADING SCREENS
 import 'package:rize_app/services/loading.dart';
+import 'package:rize_app/services/loading_sleep.dart';
+import 'package:rize_app/services/loading_training_show.dart';
+import 'package:rize_app/services/loading_trainings.dart';
 import 'package:rize_app/services/loading_weight.dart';
+import 'package:rize_app/services/loading_weight_edit.dart';
 
 void main() => runApp(MaterialApp(
   initialRoute: '/',
@@ -38,11 +42,15 @@ void main() => runApp(MaterialApp(
     '/training_show': (context) => const TrainingShow(),
     '/sessions_index': (context) => const SessionsIndex(),
     '/session_show': (context) => const SessionShow(),
+    '/trainings_loading': (context) => const LoadingTrainings(),
+    '/loading_training_show': (context) => const LoadingTrainingShow(),
 
     // ROUTES WEIGHT
     '/weight': (context) => const Weight(),
-    '/edit_weight': (context) => const WeightEdit(),
+    '/weight_edit': (context) => const WeightEdit(),
     '/weight_loading': (context) => const LoadingWeight(),
+    '/weight_edit_loading': (context) => const LoadingWeightEdit(),
+
     // ROUTES NUTRITION
     '/nutritions': (context) => const Nutritions(),
     '/meals': (context) => const MealIndex(),
@@ -52,5 +60,6 @@ void main() => runApp(MaterialApp(
     // ROUTES SLEEPING
     '/sleepings': (context) => const Sleepings(),
     '/edit_sleeping': (context) => const SleepingEdit(),
+    '/sleep_loading': (context) => const LoadingSleep(),
   },
 ));

@@ -8,21 +8,31 @@ class TrainingShow extends StatefulWidget {
 }
 
 class _TrainingShowState extends State<TrainingShow> {
+
+  Map data = {};
+
   @override
   Widget build(BuildContext context) {
+
+    data = data.isNotEmpty ? data : ModalRoute.of(context)?.settings.arguments as Map;
+
     const myBlue = 0xff145675;
     const myGreen = 0xff0E604F;
     const myRed = 0xffA32F3D;
     const triangleGrey = 0xff444444;
+    const bgBlack = 0xff1C1C1C;
 
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        leading: BackButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/');
+            }),
         backgroundColor: Colors.transparent,
       ),
       body: Center(
         child: // TRAINING
-        // NUTRITION
         ListView(
           children: [
             SafeArea(child: Container(
@@ -43,7 +53,7 @@ class _TrainingShowState extends State<TrainingShow> {
                       children: const [
                         Flexible(
                           child: Text(
-                            'Start this training',
+                            'Your trainings',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 26,
@@ -58,7 +68,7 @@ class _TrainingShowState extends State<TrainingShow> {
                     const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      children: const [
+                      children: [
                         Flexible(
                             child: Card(
                               color: Color(myBlue),
@@ -66,7 +76,7 @@ class _TrainingShowState extends State<TrainingShow> {
                               child: Padding(
                                 padding: EdgeInsets.symmetric(vertical: 22, horizontal: 0),
                                 child: ListTile(
-                                  title: Text('Chest & Triceps',
+                                  title: Text(data['training'],
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontSize: 22,
@@ -83,13 +93,13 @@ class _TrainingShowState extends State<TrainingShow> {
                     ),
                     const SizedBox(height: 30),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 8),
+                      padding: const EdgeInsets.all(8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: const [
                           Flexible(
                             child: Text(
-                              'Previous sessions',
+                              'Last 4 sessions',
                               style: TextStyle(
                                 fontSize: 18,
                                 letterSpacing: 2,
@@ -102,273 +112,77 @@ class _TrainingShowState extends State<TrainingShow> {
                       ),
                     ),
                     const SizedBox(height: 2),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Flexible(
-                          fit: FlexFit.tight,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(const Color(triangleGrey)),
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: const BorderSide(
-                                        color: Color(myBlue),
-                                        width: 2,
-                                      )
+                    ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: data['lastFourSessions'].length,
+                        itemBuilder: (context, index){
+                          var t;
+                          var lessOrMore;
+                          if(data['lastFourSessions'][index][2] >= 0){
+                            t = '+';
+                            lessOrMore = myGreen;
+                          } else {
+                            t = '';
+                            lessOrMore = myRed;
+                          }
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 4),
+                            child: Card(
+                              child: ListTile(
+                                onTap:() {
+                                },
+                                shape: const Border(
+                                  bottom: BorderSide(
+                                    color: Color(myBlue),
+                                    width: 3,
+                                  ),
+                                  top: BorderSide(
+                                    color: Color(myBlue),
+                                    width: 3,
+                                  ),
+                                  left: BorderSide(
+                                    color: Color(myBlue),
+                                    width: 3,
+                                  ),
+                                  right: BorderSide(
+                                    color: Color(myBlue),
+                                    width: 3,
+                                  ),
+                                ),
+                                tileColor: const Color(triangleGrey),
+                                title: Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 0),
+                                    child: Text(
+                                      data['lastFourSessions'][index][1],
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        letterSpacing: 2,
+                                        color: Colors.white,
+                                        fontFamily: 'AgrandirHeavy',
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                isThreeLine: true,
+                                subtitle: Center(
+                                  child: Text(
+                                    '${data['lastFourSessions'][index][0]} Kg lifted ($t ${data['lastFourSessions'][index][2]} Kg compare to previous)',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Color(lessOrMore),
+                                      fontFamily: 'AgrandirRegular',
+                                    ),
                                   ),
                                 ),
                               ),
-                              onPressed:() {
-                                Navigator.pushNamed(context, '/session_show');
-                              },
-                              child: Card(
-                                color: Color(triangleGrey),
-                                elevation: 0,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 17, horizontal: 17),
-                                  child: Column(
-                                    children: const [
-                                      Padding(
-                                        padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                                        child: Text('10/07/22',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            letterSpacing: 2,
-                                            color: Colors.white,
-                                            fontFamily: 'AgrandirHeavy',
-                                          ),
-                                        ),
-                                      ),
-                                      Text('416 kg lifted',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirRegular',
-                                        ),
-                                      ),
-                                      Text('-26kg lifted',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          letterSpacing: 2,
-                                          color: Color(myRed),
-                                          fontFamily: 'AgrandirRegular',
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
+
                             ),
-                          ),
-                        ),
-                        Flexible(
-                          fit: FlexFit.tight,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(const Color(triangleGrey)),
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: const BorderSide(
-                                        color: Color(myBlue),
-                                        width: 2,
-                                      )
-                                  ),
-                                ),
-                              ),
-                              onPressed:() {
-                                Navigator.pushNamed(context, '/session_show');
-                              },
-                              child: Card(
-                                color: Color(triangleGrey),
-                                elevation: 0,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 17, horizontal: 17),
-                                  child: Column(
-                                    children: const [
-                                      Padding(
-                                        padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                                        child: Text('10/07/22',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            letterSpacing: 2,
-                                            color: Colors.white,
-                                            fontFamily: 'AgrandirHeavy',
-                                          ),
-                                        ),
-                                      ),
-                                      Text('416 kg lifted',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirRegular',
-                                        ),
-                                      ),
-                                      Text('+22kg lifted',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          letterSpacing: 2,
-                                          color: Color(myGreen),
-                                          fontFamily: 'AgrandirRegular',
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                          );
+                        }
                     ),
-                    const SizedBox(height: 2),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Flexible(
-                          fit: FlexFit.tight,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(const Color(triangleGrey)),
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: const BorderSide(
-                                        color: Color(myBlue),
-                                        width: 2,
-                                      )
-                                  ),
-                                ),
-                              ),
-                              onPressed:() {
-                                Navigator.pushNamed(context, '/session_show');
-                              },
-                              child: Card(
-                                color: Color(triangleGrey),
-                                elevation: 0,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 17, horizontal: 17),
-                                  child: Column(
-                                    children: const [
-                                      Padding(
-                                        padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                                        child: Text('10/07/22',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            letterSpacing: 2,
-                                            color: Colors.white,
-                                            fontFamily: 'AgrandirHeavy',
-                                          ),
-                                        ),
-                                      ),
-                                      Text('416 kg lifted',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirRegular',
-                                        ),
-                                      ),
-                                      Text('-26kg lifted',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          letterSpacing: 2,
-                                          color: Color(myRed),
-                                          fontFamily: 'AgrandirRegular',
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Flexible(
-                          fit: FlexFit.tight,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(const Color(triangleGrey)),
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: const BorderSide(
-                                        color: Color(myBlue),
-                                        width: 2,
-                                      )
-                                  ),
-                                ),
-                              ),
-                              onPressed:() {
-                                Navigator.pushNamed(context, '/session_show');
-                              },
-                              child: Card(
-                                color: Color(triangleGrey),
-                                elevation: 0,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 17, horizontal: 17),
-                                  child: Column(
-                                    children: const [
-                                      Padding(
-                                        padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                                        child: Text('10/07/22',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            letterSpacing: 2,
-                                            color: Colors.white,
-                                            fontFamily: 'AgrandirHeavy',
-                                          ),
-                                        ),
-                                      ),
-                                      Text('416 kg lifted',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirRegular',
-                                        ),
-                                      ),
-                                      Text('+22kg lifted',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          letterSpacing: 2,
-                                          color: Color(myGreen),
-                                          fontFamily: 'AgrandirRegular',
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -379,11 +193,6 @@ class _TrainingShowState extends State<TrainingShow> {
                             child: ElevatedButton(
                               style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all<Color>(const Color(myBlue)),
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50.0),
-                                  ),
-                                ),
                               ),
                               onPressed:() {
                                 Navigator.pushNamed(context, '/sessions_index');
@@ -436,6 +245,37 @@ class _TrainingShowState extends State<TrainingShow> {
                         ],
                       ),
                     ),
+
+                    ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: data['muscles'].length,
+                        itemBuilder: (context, index){
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 4),
+                            child: Card(
+                              child: ListTile(
+                                tileColor: const Color(bgBlack),
+                                title: Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 0),
+                                    child: Text(
+                                      data['muscles'][index]['name'],
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        letterSpacing: 2,
+                                        color: Colors.white,
+                                        fontFamily: 'AgrandirHeavy',
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        }
+                    ),
+
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
@@ -596,7 +436,7 @@ class _TrainingShowState extends State<TrainingShow> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 60)
                   ],
                 ),
               ),
@@ -628,7 +468,7 @@ class _TrainingShowState extends State<TrainingShow> {
                     icon: const Icon(Icons.directions_run),
                     color: const Color(myBlue),
                     iconSize: 30,
-                    onPressed: () {Navigator.pushNamed(context, '/trainings');},
+                    onPressed: () {Navigator.pushNamed(context, '/trainings_loading');},
                   ),
                   IconButton(
                     icon: const Icon(Icons.home),
@@ -638,7 +478,7 @@ class _TrainingShowState extends State<TrainingShow> {
                   IconButton(
                     icon: const Icon(Icons.bed),
                     iconSize: 30,
-                    onPressed: () {Navigator.pushNamed(context, '/sleepings');},
+                    onPressed: () {Navigator.pushNamed(context, '/sleep_loading');},
                   ),
                   IconButton(
                     icon: const Icon(Icons.more_horiz),

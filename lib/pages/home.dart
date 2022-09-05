@@ -167,7 +167,7 @@ class _HomeState extends State<Home> {
                                   backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent)
                               ),
                               onPressed:() {
-                                Navigator.pushNamed(context, '/trainings');},
+                                Navigator.pushNamed(context, '/trainings_loading');},
                             child: Card(
                               color: const Color(myBlue),
                               elevation: 0,
@@ -177,7 +177,7 @@ class _HomeState extends State<Home> {
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 10),
                                 child: ListTile(
-                                  onTap: () {Navigator.pushNamed(context, '/trainings');},
+                                  onTap: () {Navigator.pushNamed(context, '/trainings_loading');},
                                   title: const Text('Start training',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
@@ -338,7 +338,7 @@ class _HomeState extends State<Home> {
                                   backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent)
                               ),
                               onPressed:() {
-                                Navigator.pushNamed(context, '/sleepings');
+                                Navigator.pushNamed(context, '/sleep_loading');
                               },
                               child: Card(
                                 color: const Color(myGreen),
@@ -349,7 +349,7 @@ class _HomeState extends State<Home> {
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 10),
                                   child: ListTile(
-                                    onTap: () {Navigator.pushNamed(context, '/sleepings');},
+                                    onTap: () {Navigator.pushNamed(context, '/sleep_loading');},
                                     title: Text('${data['go_to_sleep']} to ${data['waking_up']}',
                                       textAlign: TextAlign.center,
                                       style: const TextStyle(
@@ -406,7 +406,7 @@ class _HomeState extends State<Home> {
                   IconButton(
                     icon: const Icon(Icons.directions_run),
                     iconSize: 30,
-                    onPressed: () {Navigator.pushNamed(context, '/trainings');},
+                    onPressed: () {Navigator.pushNamed(context, '/trainings_loading');},
                   ),
                   IconButton(
                     icon: const Icon(Icons.home),
@@ -417,7 +417,7 @@ class _HomeState extends State<Home> {
                   IconButton(
                     icon: const Icon(Icons.bed),
                     iconSize: 30,
-                    onPressed: () {Navigator.pushNamed(context, '/sleepings');},
+                    onPressed: () {Navigator.pushNamed(context, '/sleep_loading');},
                   ),
                   IconButton(
                     icon: const Icon(Icons.more_horiz),

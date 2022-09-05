@@ -96,7 +96,7 @@ class _SleepingEditState extends State<SleepingEdit> {
                                 ),
                               ),
                               onPressed:() {
-                                Navigator.pushNamed(context, '/sleepings');
+                                Navigator.pushNamed(context, '/sleep_loading');
                               },
                               child: Card(
                                 color: const Color(myGreen),
@@ -153,7 +153,7 @@ class _SleepingEditState extends State<SleepingEdit> {
                   IconButton(
                     icon: const Icon(Icons.directions_run),
                     iconSize: 30,
-                    onPressed: () {Navigator.pushNamed(context, '/trainings');},
+                    onPressed: () {Navigator.pushNamed(context, '/trainings_loading');},
                   ),
                   IconButton(
                     icon: const Icon(Icons.home),
@@ -164,7 +164,7 @@ class _SleepingEditState extends State<SleepingEdit> {
                     icon: const Icon(Icons.bed),
                     color: const Color(myGreen),
                     iconSize: 30,
-                    onPressed: () {Navigator.pushNamed(context, '/sleepings');},
+                    onPressed: () {Navigator.pushNamed(context, '/sleep_loading');},
                   ),
                   IconButton(
                     icon: const Icon(Icons.more_horiz),

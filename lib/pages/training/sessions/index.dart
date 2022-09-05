@@ -274,7 +274,7 @@ class _SessionsIndexState extends State<SessionsIndex> {
                     icon: const Icon(Icons.directions_run),
                     iconSize: 30,
                     color: const Color(myBlue),
-                    onPressed: () {Navigator.pushNamed(context, '/trainings');},
+                    onPressed: () {Navigator.pushNamed(context, '/trainings_loading');},
                   ),
                   IconButton(
                     icon: const Icon(Icons.home),
@@ -284,7 +284,7 @@ class _SessionsIndexState extends State<SessionsIndex> {
                   IconButton(
                     icon: const Icon(Icons.bed),
                     iconSize: 30,
-                    onPressed: () {Navigator.pushNamed(context, '/sleepings');},
+                    onPressed: () {Navigator.pushNamed(context, '/sleep_loading');},
                   ),
                   IconButton(
                     icon: const Icon(Icons.more_horiz),

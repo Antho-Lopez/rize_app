@@ -8,12 +8,17 @@ class Sleepings extends StatefulWidget {
 }
 
 class _SleepingsState extends State<Sleepings> {
+
+  Map data = {};
+
   @override
   Widget build(BuildContext context) {
 
-    const myBlue = 0xff145675;
+    data = data.isNotEmpty ? data : ModalRoute.of(context)?.settings.arguments as Map;
+
     const myGreen = 0xff0E604F;
     const triangleGrey = 0xff444444;
+    const bgBlack = 0xff1C1C1C;
     // set bg
     String bgImage = 'triangle_bg.png';
 
@@ -67,23 +72,13 @@ class _SleepingsState extends State<Sleepings> {
                               child: Padding(
                                 padding: EdgeInsets.symmetric(vertical: 22, horizontal: 0),
                                 child: ListTile(
-                                  isThreeLine: true,
-                                  title: Text('Tonight\'s sleep schedule',
+                                  title: Text('Change your sleep schedule',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontSize: 22,
                                       letterSpacing: 2,
                                       color: Colors.white,
                                       fontFamily: 'AgrandirHeavy',
-                                    ),
-                                  ),
-                                  subtitle: Text('23h15 - 7h15 (8 hours)',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 22,
-                                      letterSpacing: 2,
-                                      color: Colors.white,
-                                      fontFamily: 'AgrandirRegular',
                                     ),
                                   ),
                                 ),
@@ -93,302 +88,49 @@ class _SleepingsState extends State<Sleepings> {
                       ],
                     ),
                     const SizedBox(height: 30),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Flexible(
-                          child: Text(
-                            'Weekly sleeping program',
-                            style: TextStyle(
-                              fontSize: 18,
-                              letterSpacing: 2,
-                              color: Colors.white,
-                              fontFamily: 'AgrandirHeavy',
+
+                    ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: data['sleep_schedule'].length,
+                        itemBuilder: (context, index){
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 4),
+                            child: Card(
+                              child: ListTile(
+                                shape: const Border(
+                                  bottom: BorderSide(
+                                      color: Colors.white
+                                  ),
+                                  top: BorderSide(
+                                      color: Color(bgBlack)
+                                  ),
+                                ),
+                                tileColor: const Color(bgBlack),
+                                title: Text(
+                                  data['sleep_schedule'][index]['day_sleep'],
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    letterSpacing: 2,
+                                    color: Colors.white,
+                                    fontFamily: 'AgrandirRegular',
+                                  ),
+                                ),
+                                trailing: Text(
+                                  '${data['sleep_schedule'][index]['go_to_sleep']} - ${data['sleep_schedule'][index]['waking_up']}',
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    letterSpacing: 2,
+                                    color: Colors.white,
+                                    fontFamily: 'AgrandirRegular',
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
-                        )
-                      ],
+                          );
+                        }
                     ),
-                    const SizedBox(height: 30),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text(
-                          'Monday',
-                          style: TextStyle(
-                            fontSize: 18,
-                            letterSpacing: 2,
-                            fontFamily: 'AgrandirRegular',
-                            shadows: [
-                              Shadow(
-                                  color: Colors.white,
-                                  offset: Offset(0, -5))
-                            ],
-                            color: Colors.transparent,
-                            decoration: TextDecoration.underline,
-                            decorationColor: Colors.white,
-                            decorationThickness: 2,
-                          ),
-                        ),
-                        Text(
-                          '   23h15 - 07h15 (8 hours)',
-                          style: TextStyle(
-                            fontSize: 18,
-                            letterSpacing: 2,
-                            fontFamily: 'AgrandirRegular',
-                            shadows: [
-                              Shadow(
-                                  color: Colors.white,
-                                  offset: Offset(0, -5))
-                            ],
-                            color: Colors.transparent,
-                            decoration: TextDecoration.underline,
-                            decorationColor: Colors.white,
-                            decorationThickness: 2,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text(
-                          'Tuesday',
-                          style: TextStyle(
-                            fontSize: 18,
-                            letterSpacing: 2,
-                            fontFamily: 'AgrandirRegular',
-                            shadows: [
-                              Shadow(
-                                  color: Colors.white,
-                                  offset: Offset(0, -5))
-                            ],
-                            color: Colors.transparent,
-                            decoration: TextDecoration.underline,
-                            decorationColor: Colors.white,
-                            decorationThickness: 2,
-                          ),
-                        ),
-                        Text(
-                          '   23h15 - 07h15 (8 hours)',
-                          style: TextStyle(
-                            fontSize: 18,
-                            letterSpacing: 2,
-                            fontFamily: 'AgrandirRegular',
-                            shadows: [
-                              Shadow(
-                                  color: Colors.white,
-                                  offset: Offset(0, -5))
-                            ],
-                            color: Colors.transparent,
-                            decoration: TextDecoration.underline,
-                            decorationColor: Colors.white,
-                            decorationThickness: 2,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text(
-                          'Wednesday',
-                          style: TextStyle(
-                            fontSize: 18,
-                            letterSpacing: 2,
-                            fontFamily: 'AgrandirRegular',
-                            shadows: [
-                              Shadow(
-                                  color: Colors.white,
-                                  offset: Offset(0, -5))
-                            ],
-                            color: Colors.transparent,
-                            decoration: TextDecoration.underline,
-                            decorationColor: Colors.white,
-                            decorationThickness: 2,
-                          ),
-                        ),
-                        Text(
-                          '   23h15 - 07h15 (8 hours)',
-                          style: TextStyle(
-                            fontSize: 18,
-                            letterSpacing: 2,
-                            fontFamily: 'AgrandirRegular',
-                            shadows: [
-                              Shadow(
-                                  color: Colors.white,
-                                  offset: Offset(0, -5))
-                            ],
-                            color: Colors.transparent,
-                            decoration: TextDecoration.underline,
-                            decorationColor: Colors.white,
-                            decorationThickness: 2,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text(
-                          'Thursday',
-                          style: TextStyle(
-                            fontSize: 18,
-                            letterSpacing: 2,
-                            fontFamily: 'AgrandirRegular',
-                            shadows: [
-                              Shadow(
-                                  color: Colors.white,
-                                  offset: Offset(0, -5))
-                            ],
-                            color: Colors.transparent,
-                            decoration: TextDecoration.underline,
-                            decorationColor: Colors.white,
-                            decorationThickness: 2,
-                          ),
-                        ),
-                        Text(
-                          '   23h15 - 07h15 (8 hours)',
-                          style: TextStyle(
-                            fontSize: 18,
-                            letterSpacing: 2,
-                            fontFamily: 'AgrandirRegular',
-                            shadows: [
-                              Shadow(
-                                  color: Colors.white,
-                                  offset: Offset(0, -5))
-                            ],
-                            color: Colors.transparent,
-                            decoration: TextDecoration.underline,
-                            decorationColor: Colors.white,
-                            decorationThickness: 2,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text(
-                          'Friday',
-                          style: TextStyle(
-                            fontSize: 18,
-                            letterSpacing: 2,
-                            fontFamily: 'AgrandirRegular',
-                            shadows: [
-                              Shadow(
-                                  color: Colors.white,
-                                  offset: Offset(0, -5))
-                            ],
-                            color: Colors.transparent,
-                            decoration: TextDecoration.underline,
-                            decorationColor: Colors.white,
-                            decorationThickness: 2,
-                          ),
-                        ),
-                        Text(
-                          '   23h15 - 07h15 (8 hours)',
-                          style: TextStyle(
-                            fontSize: 18,
-                            letterSpacing: 2,
-                            fontFamily: 'AgrandirRegular',
-                            shadows: [
-                              Shadow(
-                                  color: Colors.white,
-                                  offset: Offset(0, -5))
-                            ],
-                            color: Colors.transparent,
-                            decoration: TextDecoration.underline,
-                            decorationColor: Colors.white,
-                            decorationThickness: 2,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text(
-                          'Saturday',
-                          style: TextStyle(
-                            fontSize: 18,
-                            letterSpacing: 2,
-                            fontFamily: 'AgrandirRegular',
-                            shadows: [
-                              Shadow(
-                                  color: Colors.white,
-                                  offset: Offset(0, -5))
-                            ],
-                            color: Colors.transparent,
-                            decoration: TextDecoration.underline,
-                            decorationColor: Colors.white,
-                            decorationThickness: 2,
-                          ),
-                        ),
-                        Text(
-                          '   23h15 - 07h15 (8 hours)',
-                          style: TextStyle(
-                            fontSize: 18,
-                            letterSpacing: 2,
-                            fontFamily: 'AgrandirRegular',
-                            shadows: [
-                              Shadow(
-                                  color: Colors.white,
-                                  offset: Offset(0, -5))
-                            ],
-                            color: Colors.transparent,
-                            decoration: TextDecoration.underline,
-                            decorationColor: Colors.white,
-                            decorationThickness: 2,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text(
-                          'Sunday',
-                          style: TextStyle(
-                            fontSize: 18,
-                            letterSpacing: 2,
-                            fontFamily: 'AgrandirRegular',
-                            shadows: [
-                              Shadow(
-                                  color: Colors.white,
-                                  offset: Offset(0, -5))
-                            ],
-                            color: Colors.transparent,
-                            decoration: TextDecoration.underline,
-                            decorationColor: Colors.white,
-                            decorationThickness: 2,
-                          ),
-                        ),
-                        Text(
-                          '   23h15 - 07h15 (8 hours)',
-                          style: TextStyle(
-                            fontSize: 18,
-                            letterSpacing: 2,
-                            fontFamily: 'AgrandirRegular',
-                            shadows: [
-                              Shadow(
-                                  color: Colors.white,
-                                  offset: Offset(0, -5))
-                            ],
-                            color: Colors.transparent,
-                            decoration: TextDecoration.underline,
-                            decorationColor: Colors.white,
-                            decorationThickness: 2,
-                          ),
-                        ),
-                      ],
-                    ),
+
                     const SizedBox(height: 60),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -539,7 +281,7 @@ class _SleepingsState extends State<Sleepings> {
                   IconButton(
                     icon: const Icon(Icons.directions_run),
                     iconSize: 30,
-                    onPressed: () {Navigator.pushNamed(context, '/trainings');},
+                    onPressed: () {Navigator.pushNamed(context, '/trainings_loading');},
                   ),
                   IconButton(
                     icon: const Icon(Icons.home),
@@ -550,7 +292,7 @@ class _SleepingsState extends State<Sleepings> {
                     icon: const Icon(Icons.bed),
                     color: const Color(myGreen),
                     iconSize: 30,
-                    onPressed: () {Navigator.pushNamed(context, '/sleepings');},
+                    onPressed: () {Navigator.pushNamed(context, '/sleep_loading');},
                   ),
                   IconButton(
                     icon: const Icon(Icons.more_horiz),

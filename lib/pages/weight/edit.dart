@@ -9,11 +9,14 @@ class WeightEdit extends StatefulWidget {
 
 class _WeightEditState extends State<WeightEdit> {
 
-  double currentWeight = double.parse((68.2).toStringAsFixed(1));
+  Map data = {};
 
+  double currentWeight = 50;
   @override
 
   Widget build(BuildContext context) {
+
+    data = data.isNotEmpty ? data : ModalRoute.of(context)?.settings.arguments as Map;
 
     const myGreen = 0xff0E604F;
 
@@ -75,8 +78,8 @@ class _WeightEditState extends State<WeightEdit> {
                                   IconButton(
                                       onPressed:() {
                                         setState(() {
-                                          currentWeight = currentWeight - 0.1;
-                                          currentWeight = double.parse((currentWeight).toStringAsFixed(1));
+                                          data['current_weight'] = data['current_weight'] - 0.1;
+                                          data['current_weight'] = double.parse(data['current_weight'].toStringAsFixed(1));
                                         });
                                       },
                                       icon: const Icon(
@@ -86,7 +89,7 @@ class _WeightEditState extends State<WeightEdit> {
                                       )
                                   ),
                                   Text(
-                                    '$currentWeight'  ' Kg',
+                                    '${data['current_weight']}',
                                     style: const TextStyle(
                                       fontSize: 36,
                                       letterSpacing: 2,
@@ -97,8 +100,8 @@ class _WeightEditState extends State<WeightEdit> {
                                   IconButton(
                                       onPressed:() {
                                         setState(() {
-                                          currentWeight = currentWeight + 0.1;
-                                          currentWeight = double.parse((currentWeight).toStringAsFixed(1));
+                                          data['current_weight'] = data['current_weight'] + 0.1;
+                                          data['current_weight'] = double.parse(data['current_weight'].toStringAsFixed(1));
                                         });
                                       },
                                       icon: const Icon(
@@ -187,7 +190,7 @@ class _WeightEditState extends State<WeightEdit> {
                   IconButton(
                     icon: const Icon(Icons.directions_run),
                     iconSize: 30,
-                    onPressed: () {Navigator.pushNamed(context, '/trainings');},
+                    onPressed: () {Navigator.pushNamed(context, '/trainings_loading');},
                   ),
                   IconButton(
                     icon: const Icon(Icons.home),
@@ -198,7 +201,7 @@ class _WeightEditState extends State<WeightEdit> {
                   IconButton(
                     icon: const Icon(Icons.bed),
                     iconSize: 30,
-                    onPressed: () {Navigator.pushNamed(context, '/sleepings');},
+                    onPressed: () {Navigator.pushNamed(context, '/sleep_loading');},
                   ),
                   IconButton(
                     icon: const Icon(Icons.more_horiz),
