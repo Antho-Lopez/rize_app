@@ -24,6 +24,7 @@ import 'package:rize_app/pages/training/sessions/show.dart';
 
 // LOADING SCREENS
 import 'package:rize_app/services/loading.dart';
+import 'package:rize_app/services/loading_nutritions.dart';
 import 'package:rize_app/services/loading_sleep.dart';
 import 'package:rize_app/services/loading_training_show.dart';
 import 'package:rize_app/services/loading_trainings.dart';
@@ -53,6 +54,7 @@ void main() => runApp(MaterialApp(
 
     // ROUTES NUTRITION
     '/nutritions': (context) => const Nutritions(),
+    '/loading_nutritions': (context) => const LoadingNutritions(),
     '/meals': (context) => const MealIndex(),
     '/daily_meals': (context) => const DailyMeal(),
     '/choose_daily_meal': (context) => const ChooseDailyMeal(),

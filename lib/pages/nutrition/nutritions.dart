@@ -8,14 +8,18 @@ class Nutritions extends StatefulWidget {
 }
 
 class _NutritionsState extends State<Nutritions> {
+
+  Map data = {};
+
   @override
   Widget build(BuildContext context) {
 
-    const myBlue = 0xff145675;
+    data = data.isNotEmpty ? data : ModalRoute.of(context)?.settings.arguments as Map;
+    print(data['nutritions']);
+    List day = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    List iconsMeal = ['canneberge.png', 'figure.png', 'grain-de-raisin.png', 'grenade.png', 'orange.png', 'pasteque.png', 'poire.png'];
     const myGreen = 0xff0E604F;
     const triangleGrey = 0xff444444;
-    // set bg
-    String bgImage = 'triangle_bg.png';
 
     return Scaffold(
       appBar: AppBar(
@@ -28,13 +32,6 @@ class _NutritionsState extends State<Nutritions> {
         ListView(
           children: [
             SafeArea(child: Container(
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/triangle_bg.png'),
-                    fit: BoxFit.fitWidth,
-                    alignment: Alignment.topCenter,
-                  )
-              ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 0),
                 child: Column(
@@ -60,15 +57,15 @@ class _NutritionsState extends State<Nutritions> {
                     const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      children: const [
+                      children: [
                         Flexible(
                             child: Card(
                               color: Color(myGreen),
                               elevation: 0,
                               child: Padding(
-                                padding: EdgeInsets.symmetric(vertical: 22, horizontal: 0),
+                                padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 0),
                                 child: ListTile(
-                                  title: Text('Recommended',
+                                  title: const Text('Recommended',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontSize: 22,
@@ -77,13 +74,15 @@ class _NutritionsState extends State<Nutritions> {
                                       fontFamily: 'AgrandirHeavy',
                                     ),
                                   ),
-                                  subtitle: Text('2450 Kcal',
+                                  isThreeLine: true,
+                                  subtitle: Text('${data['daily_kcal_goal']} Kcal / proteins : ${data['protein_per_day']} g'
+                                      ' / glucose : ${data['glucose_per_day']} g / lipids : ${data['lipid_per_day']} g',
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 16,
+                                    style: const TextStyle(
+                                      fontSize: 18,
                                       letterSpacing: 2,
                                       color: Colors.white,
-                                      fontFamily: 'AgrandirLight',
+                                      fontFamily: 'AgrandirRegular',
                                     ),
                                   ),
                                 ),
@@ -114,473 +113,91 @@ class _NutritionsState extends State<Nutritions> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Flexible(
-                          fit: FlexFit.tight,
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(const Color(myGreen)),
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: const BorderSide(
-                                        color: Color(myGreen),
-                                        width: 2,
-                                      )
-                                  ),
-                                ),
-                              ),
-                              onPressed:() {
-                                Navigator.pushNamed(context, '/meals');
+                            padding: const EdgeInsets.fromLTRB(8, 20, 8, 4),
+                            child: ListTile(
+                              onTap:() {
                               },
-                              child: Card(
-                                color: const Color(myGreen),
-                                elevation: 0,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 17, horizontal: 17),
-                                  child: Column(
-                                    children: const [
-                                      Image(
-                                          width: 65,
-                                          image: AssetImage('assets/banane.png')
-                                      ),
-                                      Text('Monday',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirHeavy',
-                                        ),
-                                      ),
-                                      Text('2498 Kcal',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirLight',
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                              tileColor: const Color(myGreen),
+                              leading: const Image(
+                                  width: 35,
+                                  image: AssetImage('assets/banane.png')
+                              ),
+                              title:
+                              const Text(
+                                'Check your meals',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  letterSpacing: 2,
+                                  color: Colors.white,
+                                  fontFamily: 'AgrandirHeavy',
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                        Flexible(
-                          fit: FlexFit.tight,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(const Color(triangleGrey)),
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: const BorderSide(
-                                        color: Color(myGreen),
-                                        width: 2,
-                                      )
-                                  ),
-                                ),
-                              ),
-                              onPressed:() {
-                                Navigator.pushNamed(context, '/daily_meals');
-                              },
-                              child: Card(
-                                color: Color(triangleGrey),
-                                elevation: 0,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 17, horizontal: 17),
-                                  child: Column(
-                                    children: const [
-                                      Image(
-                                          width: 65,
-                                          image: AssetImage('assets/grain-de-raisin.png')
-                                      ),
-                                      Text('Monday',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirHeavy',
-                                        ),
-                                      ),
-                                      Text('2498 Kcal',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirLight',
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        )
                       ],
                     ),
                     const SizedBox(height: 2),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Flexible(
-                          fit: FlexFit.tight,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(const Color(triangleGrey)),
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: const BorderSide(
-                                        color: Color(myGreen),
-                                        width: 2,
-                                      )
+                    ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: data['nutritions'].length,
+                        itemBuilder: (context, index){
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 4),
+                            child: Card(
+                              child: ListTile(
+                                onTap:() {
+                                },
+                                shape: const Border(
+                                  bottom: BorderSide(
+                                    color: Color(myGreen),
+                                    width: 3,
+                                  ),
+                                  top: BorderSide(
+                                    color: Color(myGreen),
+                                    width: 3,
+                                  ),
+                                  left: BorderSide(
+                                    color: Color(myGreen),
+                                    width: 3,
+                                  ),
+                                  right: BorderSide(
+                                    color: Color(myGreen),
+                                    width: 3,
                                   ),
                                 ),
-                              ),
-                              onPressed:() {
-                                Navigator.pushNamed(context, '/daily_meals');
-                              },
-                              child: Card(
-                                color: Color(triangleGrey),
-                                elevation: 0,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 17, horizontal: 17),
-                                  child: Column(
-                                    children: const [
-                                      Image(
-                                          width: 65,
-                                          image: AssetImage('assets/grain-de-raisin.png')
-                                      ),
-                                      Text('Monday',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirHeavy',
-                                        ),
-                                      ),
-                                      Text('2498 Kcal',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirLight',
-                                        ),
-                                      ),
-                                    ],
+                                tileColor: const Color(triangleGrey),
+                                leading: Image(
+                                    width: 35,
+                                    image: AssetImage('assets/${iconsMeal[index]}')
+                                ),
+                                subtitle: Text(
+                                  '${day[index]}',
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    letterSpacing: 2,
+                                    color: Colors.white,
+                                    fontFamily: 'AgrandirRegular',
                                   ),
                                 ),
+                                title:
+                                  Text(
+                                    '${data['nutritions'][index]} Kcal',
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        letterSpacing: 2,
+                                        color: Colors.white,
+                                        fontFamily: 'AgrandirHeavy',
+                                      ),
+                                  ),
                               ),
                             ),
-                          ),
-                        ),
-                        Flexible(
-                          fit: FlexFit.tight,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(const Color(triangleGrey)),
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: const BorderSide(
-                                        color: Color(myGreen),
-                                        width: 2,
-                                      )
-                                  ),
-                                ),
-                              ),
-                              onPressed:() {
-                                Navigator.pushNamed(context, '/daily_meals');
-                              },
-                              child: Card(
-                                color: Color(triangleGrey),
-                                elevation: 0,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 17, horizontal: 17),
-                                  child: Column(
-                                    children: const [
-                                      Image(
-                                          width: 65,
-                                          image: AssetImage('assets/grain-de-raisin.png')
-                                      ),
-                                      Text('Monday',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirHeavy',
-                                        ),
-                                      ),
-                                      Text('2498 Kcal',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirLight',
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                          );
+                        }
                     ),
-                    const SizedBox(height: 2),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Flexible(
-                          fit: FlexFit.tight,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(const Color(triangleGrey)),
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: const BorderSide(
-                                        color: Color(myGreen),
-                                        width: 2,
-                                      )
-                                  ),
-                                ),
-                              ),
-                              onPressed:() {
-                                Navigator.pushNamed(context, '/daily_meals');
-                              },
-                              child: Card(
-                                color: Color(triangleGrey),
-                                elevation: 0,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 17, horizontal: 17),
-                                  child: Column(
-                                    children: const [
-                                      Image(
-                                          width: 65,
-                                          image: AssetImage('assets/grain-de-raisin.png')
-                                      ),
-                                      Text('Monday',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirHeavy',
-                                        ),
-                                      ),
-                                      Text('2498 Kcal',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirLight',
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Flexible(
-                          fit: FlexFit.tight,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(const Color(triangleGrey)),
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: const BorderSide(
-                                        color: Color(myGreen),
-                                        width: 2,
-                                      )
-                                  ),
-                                ),
-                              ),
-                              onPressed:() {
-                                Navigator.pushNamed(context, '/daily_meals');
-                              },
-                              child: Card(
-                                color: Color(triangleGrey),
-                                elevation: 0,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 17, horizontal: 17),
-                                  child: Column(
-                                    children: const [
-                                      Image(
-                                          width: 65,
-                                          image: AssetImage('assets/grain-de-raisin.png')
-                                      ),
-                                      Text('Monday',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirHeavy',
-                                        ),
-                                      ),
-                                      Text('2498 Kcal',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirLight',
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 2),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Flexible(
-                          fit: FlexFit.tight,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(const Color(triangleGrey)),
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: const BorderSide(
-                                        color: Color(myGreen),
-                                        width: 2,
-                                      )
-                                  ),
-                                ),
-                              ),
-                              onPressed:() {
-                                Navigator.pushNamed(context, '/daily_meals');
-                              },
-                              child: Card(
-                                color: Color(triangleGrey),
-                                elevation: 0,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 17, horizontal: 17),
-                                  child: Column(
-                                    children: const [
-                                      Image(
-                                          width: 65,
-                                          image: AssetImage('assets/grain-de-raisin.png')
-                                      ),
-                                      Text('Monday',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirHeavy',
-                                        ),
-                                      ),
-                                      Text('2498 Kcal',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirLight',
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Flexible(
-                          fit: FlexFit.tight,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(const Color(triangleGrey)),
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: const BorderSide(
-                                        color: Color(myGreen),
-                                        width: 2,
-                                      )
-                                  ),
-                                ),
-                              ),
-                              onPressed:() {
-                                Navigator.pushNamed(context, '/daily_meals');
-                              },
-                              child: Card(
-                                color: Color(triangleGrey),
-                                elevation: 0,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 17, horizontal: 17),
-                                  child: Column(
-                                    children: const [
-                                      Image(
-                                          width: 65,
-                                          image: AssetImage('assets/grain-de-raisin.png')
-                                      ),
-                                      Text('Monday',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirHeavy',
-                                        ),
-                                      ),
-                                      Text('2498 Kcal',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirLight',
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    const SizedBox(height: 50),
                   ],
                 ),
               ),
@@ -607,7 +224,7 @@ class _NutritionsState extends State<Nutritions> {
                     icon: const Icon(Icons.emoji_food_beverage),
                     color: const Color(myGreen),
                     iconSize: 30,
-                    onPressed: () {Navigator.pushNamed(context, '/nutritions');},
+                    onPressed: () {Navigator.pushNamed(context, '/loading_nutritions');},
                   ),
                   IconButton(
                     icon: const Icon(Icons.directions_run),

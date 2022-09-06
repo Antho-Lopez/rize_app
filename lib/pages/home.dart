@@ -230,7 +230,7 @@ class _HomeState extends State<Home> {
                                   backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent)
                               ),
                               onPressed:() {
-                                Navigator.pushNamed(context, '/nutritions');
+                                Navigator.pushNamed(context, '/loading_nutritions');
                               },
                               child: Card(
                                 color: const Color(myGreen),
@@ -241,7 +241,7 @@ class _HomeState extends State<Home> {
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 10),
                                   child: ListTile(
-                                    onTap: () {Navigator.pushNamed(context, '/nutritions');},
+                                    onTap: () {Navigator.pushNamed(context, '/loading_nutritions');},
                                     title: const Text('Check your nutrition program',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
@@ -401,7 +401,7 @@ class _HomeState extends State<Home> {
                   IconButton(
                     icon: const Icon(Icons.emoji_food_beverage),
                     iconSize: 30,
-                    onPressed: () {Navigator.pushNamed(context, '/nutritions');},
+                    onPressed: () {Navigator.pushNamed(context, '/loading_nutritions');},
                   ),
                   IconButton(
                     icon: const Icon(Icons.directions_run),

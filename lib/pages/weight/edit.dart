@@ -185,7 +185,7 @@ class _WeightEditState extends State<WeightEdit> {
                   IconButton(
                     icon: const Icon(Icons.emoji_food_beverage),
                     iconSize: 30,
-                    onPressed: () {Navigator.pushNamed(context, '/nutritions');},
+                    onPressed: () {Navigator.pushNamed(context, '/loading_nutritions');},
                   ),
                   IconButton(
                     icon: const Icon(Icons.directions_run),
