@@ -24,8 +24,9 @@ class _LoadingHomeState extends State<LoadingHome> {
     var goToSleep;
     var wakingUp;
     var today_training;
+    int dayId;
 
-    /*print(userData[2]);*/
+    dayId = userData[2]['day_id'];
     if(userData[2].length == 0){
       goToSleep = 'Enter your schedule';
       wakingUp = 'receive notif';
@@ -62,6 +63,7 @@ class _LoadingHomeState extends State<LoadingHome> {
       'waking_up': wakingUp,
       'today_training': today_training,
       'today_calories': userData[4],
+      'day_id': dayId,
     });
   }
 

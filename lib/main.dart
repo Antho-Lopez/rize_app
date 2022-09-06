@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rize_app/pages/home.dart';
+import 'package:rize_app/pages/nutrition/meal/edit_daily_meals.dart';
 
 // NUTRITION PAGES
-import 'package:rize_app/pages/nutrition/meal/choose_daily_meal.dart';
 import 'package:rize_app/pages/nutrition/meal/index.dart';
 import 'package:rize_app/pages/nutrition/nutritions.dart';
 import 'package:rize_app/pages/nutrition/meal/daily_meal.dart';
@@ -24,6 +24,9 @@ import 'package:rize_app/pages/training/sessions/show.dart';
 
 // LOADING SCREENS
 import 'package:rize_app/services/loading.dart';
+import 'package:rize_app/services/loading_edit_daily_meals.dart';
+import 'package:rize_app/services/loading_meals.dart';
+import 'package:rize_app/services/loading_meals_per_day.dart';
 import 'package:rize_app/services/loading_nutritions.dart';
 import 'package:rize_app/services/loading_sleep.dart';
 import 'package:rize_app/services/loading_training_show.dart';
@@ -56,8 +59,11 @@ void main() => runApp(MaterialApp(
     '/nutritions': (context) => const Nutritions(),
     '/loading_nutritions': (context) => const LoadingNutritions(),
     '/meals': (context) => const MealIndex(),
+    '/loading_meals': (context) => const LoadingMealsIndex(),
     '/daily_meals': (context) => const DailyMeal(),
-    '/choose_daily_meal': (context) => const ChooseDailyMeal(),
+    '/loading_meals_per_days': (context) => const LoadingMealsPerDay(),
+    '/edit_daily_meals': (context) => const EditDailyMeals(),
+    '/loading_edit_daily_meals': (context) => const LoadingEditDailyMeals(),
 
     // ROUTES SLEEPING
     '/sleepings': (context) => const Sleepings(),

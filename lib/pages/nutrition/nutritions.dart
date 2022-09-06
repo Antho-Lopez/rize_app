@@ -19,6 +19,7 @@ class _NutritionsState extends State<Nutritions> {
     List day = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     List iconsMeal = ['canneberge.png', 'figure.png', 'grain-de-raisin.png', 'grenade.png', 'orange.png', 'pasteque.png', 'poire.png'];
     const myGreen = 0xff0E604F;
+    const bgblack = 0xff2D2D2D;
     const triangleGrey = 0xff444444;
 
     return Scaffold(
@@ -109,93 +110,103 @@ class _NutritionsState extends State<Nutritions> {
                       ],
                     ),
                     const SizedBox(height: 2),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Flexible(
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(8, 20, 8, 4),
-                            child: ListTile(
-                              onTap:() {
-                              },
-                              tileColor: const Color(myGreen),
-                              leading: const Image(
-                                  width: 35,
-                                  image: AssetImage('assets/banane.png')
-                              ),
-                              title:
-                              const Text(
-                                'Check your meals',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  letterSpacing: 2,
-                                  color: Colors.white,
-                                  fontFamily: 'AgrandirHeavy',
-                                ),
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                    const SizedBox(height: 2),
-                    ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        itemCount: data['nutritions'].length,
-                        itemBuilder: (context, index){
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 4),
-                            child: Card(
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Flexible(
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(8, 20, 8, 4),
                               child: ListTile(
                                 onTap:() {
+                                  Navigator.pushReplacementNamed(context, '/loading_meals');
                                 },
-                                shape: const Border(
-                                  bottom: BorderSide(
-                                    color: Color(myGreen),
-                                    width: 3,
-                                  ),
-                                  top: BorderSide(
-                                    color: Color(myGreen),
-                                    width: 3,
-                                  ),
-                                  left: BorderSide(
-                                    color: Color(myGreen),
-                                    width: 3,
-                                  ),
-                                  right: BorderSide(
-                                    color: Color(myGreen),
-                                    width: 3,
-                                  ),
-                                ),
-                                tileColor: const Color(triangleGrey),
-                                leading: Image(
+                                tileColor: const Color(myGreen),
+                                leading: const Image(
                                     width: 35,
-                                    image: AssetImage('assets/${iconsMeal[index]}')
+                                    image: AssetImage('assets/banane.png')
                                 ),
-                                subtitle: Text(
-                                  '${day[index]}',
-                                  style: const TextStyle(
+                                title:
+                                const Text(
+                                  'Check your meals',
+                                  style: TextStyle(
                                     fontSize: 16,
                                     letterSpacing: 2,
                                     color: Colors.white,
-                                    fontFamily: 'AgrandirRegular',
+                                    fontFamily: 'AgrandirHeavy',
                                   ),
                                 ),
-                                title:
-                                  Text(
-                                    '${data['nutritions'][index]} Kcal',
-                                      style: const TextStyle(
-                                        fontSize: 16,
-                                        letterSpacing: 2,
-                                        color: Colors.white,
-                                        fontFamily: 'AgrandirHeavy',
-                                      ),
-                                  ),
                               ),
                             ),
-                          );
-                        }
+                          )
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: data['nutritions'].length,
+                          itemBuilder: (context, index){
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 4),
+                              child: Card(
+                                child: ListTile(
+                                  onTap:() {
+                                    Navigator.pushReplacementNamed(context, '/loading_meals_per_days', arguments: {
+                                      'day_id': index + 1,
+                                    });
+                                  },
+                                  shape: const Border(
+                                    bottom: BorderSide(
+                                      color: Color(myGreen),
+                                      width: 3,
+                                    ),
+                                    top: BorderSide(
+                                      color: Color(myGreen),
+                                      width: 3,
+                                    ),
+                                    left: BorderSide(
+                                      color: Color(myGreen),
+                                      width: 3,
+                                    ),
+                                    right: BorderSide(
+                                      color: Color(myGreen),
+                                      width: 3,
+                                    ),
+                                  ),
+                                  tileColor: const Color(triangleGrey),
+                                  leading: Image(
+                                      width: 35,
+                                      image: AssetImage('assets/${iconsMeal[index]}')
+                                  ),
+                                  subtitle: Text(
+                                    '${day[index]}',
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      letterSpacing: 2,
+                                      color: Colors.white,
+                                      fontFamily: 'AgrandirRegular',
+                                    ),
+                                  ),
+                                  title:
+                                    Text(
+                                      '${data['nutritions'][index]} Kcal',
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          letterSpacing: 2,
+                                          color: Colors.white,
+                                          fontFamily: 'AgrandirHeavy',
+                                        ),
+                                    ),
+                                ),
+                              ),
+                            );
+                          }
+                      ),
                     ),
                     const SizedBox(height: 50),
                   ],
@@ -205,7 +216,7 @@ class _NutritionsState extends State<Nutritions> {
           ],
         ),
       ),
-      backgroundColor: Colors.white12,
+      backgroundColor: Color(bgblack),
 
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(

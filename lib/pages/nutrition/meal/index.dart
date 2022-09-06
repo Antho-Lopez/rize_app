@@ -8,9 +8,14 @@ class MealIndex extends StatefulWidget {
 }
 
 class _MealIndexState extends State<MealIndex> {
+
+  Map data = {};
+
   @override
   Widget build(BuildContext context) {
 
+    data = data.isNotEmpty ? data : ModalRoute.of(context)?.settings.arguments as Map;
+    print(data);
     const myGreen = 0xff0E604F;
     const triangleGrey = 0xff444444;
 
@@ -30,7 +35,7 @@ class _MealIndexState extends State<MealIndex> {
             SafeArea(child: Container(
               decoration: const BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage('assets/banane.png'),
+                    image: AssetImage('assets/triangle_bg.png'),
                     fit: BoxFit.fitWidth,
                     alignment: Alignment.topCenter,
                   )
@@ -40,19 +45,32 @@ class _MealIndexState extends State<MealIndex> {
                 child: Column(
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: const [
                         Flexible(
-                          child: Text(
-                            'Your meals',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 26,
-                              letterSpacing: 2,
-                              color: Colors.white,
-                              fontFamily: 'AgrandirHeavy',
-                            ),
-                          ),
+                            child: Card(
+                              color: Color(myGreen),
+                              elevation: 0,
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 0),
+                                child: ListTile(
+                                  leading: Image(
+                                    image : AssetImage('assets/canneberge.png'),
+                                    width: 50,
+                                  ),
+                                  title: Text(
+                                    'Your meals',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 26,
+                                      letterSpacing: 2,
+                                      color: Colors.white,
+                                      fontFamily: 'AgrandirHeavy',
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
                         )
                       ],
                     ),
@@ -64,7 +82,7 @@ class _MealIndexState extends State<MealIndex> {
                         children: const [
                           Flexible(
                             child: Text(
-                              'Your meals',
+                              'All your meals',
                               style: TextStyle(
                                 fontSize: 20,
                                 letterSpacing: 2,
@@ -83,51 +101,71 @@ class _MealIndexState extends State<MealIndex> {
                           fit: FlexFit.tight,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(const Color(triangleGrey)),
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: const BorderSide(
-                                        color: Color(myGreen),
-                                        width: 2,
-                                      )
-                                  ),
-                                ),
-                              ),
-                              onPressed:() {
-                                Navigator.pushNamed(context, '/meal_show');
-                              },
-                              child: Card(
-                                color: const Color(triangleGrey),
-                                elevation: 0,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 17, horizontal: 17),
-                                  child: Column(
-                                    children: const [
-                                      Text('Early week breakfast',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirHeavy',
+                            child: ListView.builder(
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemCount: data['meals'].length,
+                                itemBuilder: (context, index){
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 4),
+                                    child: Card(
+                                      child: ListTile(
+                                        onTap:() {
+                                          Navigator.pushReplacementNamed(context, '/loading_meals_per_days', arguments: {
+                                            'day_id': index + 1,
+                                          });
+                                        },
+                                        shape: const Border(
+                                          bottom: BorderSide(
+                                            color: Color(myGreen),
+                                            width: 3,
+                                          ),
+                                          top: BorderSide(
+                                            color: Color(myGreen),
+                                            width: 3,
+                                          ),
+                                          left: BorderSide(
+                                            color: Color(myGreen),
+                                            width: 3,
+                                          ),
+                                          right: BorderSide(
+                                            color: Color(myGreen),
+                                            width: 3,
+                                          ),
+                                        ),
+                                        tileColor: const Color(triangleGrey),
+                                        title: Center(
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 0),
+                                            child: Text(
+                                              data['meals'][index]['name'],
+                                              style: const TextStyle(
+                                                fontSize: 16,
+                                                letterSpacing: 2,
+                                                color: Colors.white,
+                                                fontFamily: 'AgrandirHeavy',
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        subtitle: Center(
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+                                            child: Text(
+                                              '${data['meals'][index]['kcal']} Kcal',
+                                              style: const TextStyle(
+                                                fontSize: 16,
+                                                letterSpacing: 2,
+                                                color: Colors.white,
+                                                fontFamily: 'AgrandirRegular',
+                                              ),
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                      Text('539 Kcal',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirLight',
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
+                                    ),
+                                  );
+                                }
                             ),
                           ),
                         ),
@@ -140,193 +178,10 @@ class _MealIndexState extends State<MealIndex> {
                         Flexible(
                           fit: FlexFit.tight,
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(const Color(triangleGrey)),
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: const BorderSide(
-                                        color: Color(myGreen),
-                                        width: 2,
-                                      )
-                                  ),
-                                ),
-                              ),
-                              onPressed:() {
-                                Navigator.pushNamed(context, '/weight');
-                              },
-                              child: Card(
-                                color: const Color(triangleGrey),
-                                elevation: 0,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 17, horizontal: 17),
-                                  child: Column(
-                                    children: const [
-                                      Text('Early week breakfast',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirHeavy',
-                                        ),
-                                      ),
-                                      Text('539 Kcal',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirLight',
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 2),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Flexible(
-                          fit: FlexFit.tight,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(const Color(triangleGrey)),
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: const BorderSide(
-                                        color: Color(myGreen),
-                                        width: 2,
-                                      )
-                                  ),
-                                ),
-                              ),
-                              onPressed:() {
-                                Navigator.pushNamed(context, '/weight');
-                              },
-                              child: Card(
-                                color: const Color(triangleGrey),
-                                elevation: 0,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 17, horizontal: 17),
-                                  child: Column(
-                                    children: const [
-                                      Text('Early week breakfast',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirHeavy',
-                                        ),
-                                      ),
-                                      Text('539 Kcal',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirLight',
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 2),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Flexible(
-                          fit: FlexFit.tight,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(const Color(triangleGrey)),
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: const BorderSide(
-                                        color: Color(myGreen),
-                                        width: 2,
-                                      )
-                                  ),
-                                ),
-                              ),
-                              onPressed:() {
-                                Navigator.pushNamed(context, '/weight');
-                              },
-                              child: Card(
-                                color: const Color(triangleGrey),
-                                elevation: 0,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 17, horizontal: 17),
-                                  child: Column(
-                                    children: const [
-                                      Text('Early week breakfast',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirHeavy',
-                                        ),
-                                      ),
-                                      Text('539 Kcal',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontFamily: 'AgrandirLight',
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 2),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Flexible(
-                          fit: FlexFit.tight,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
                             child: ElevatedButton(
                               style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all<Color>(const Color(myGreen)),
-                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: const BorderSide(
-                                        color: Color(myGreen),
-                                        width: 2,
-                                      )
-                                  ),
-                                ),
                               ),
                               onPressed:() {
                                 Navigator.pushNamed(context, '/weight');

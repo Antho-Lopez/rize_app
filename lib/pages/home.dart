@@ -18,6 +18,7 @@ class _HomeState extends State<Home> {
     DateTime date = DateTime.now();
     String dayOfTheWeek = DateFormat('EEEE').format(date);
     data = data.isNotEmpty ? data : ModalRoute.of(context)?.settings.arguments as Map;
+
     const myBlue = 0xff145675;
     const myGreen = 0xff0E604F;
 
@@ -282,7 +283,11 @@ class _HomeState extends State<Home> {
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 10),
                                   child: ListTile(
-                                    onTap: () {Navigator.pushNamed(context, '/daily_meals');},
+                                    onTap:() {
+                                      Navigator.pushReplacementNamed(context, '/loading_meals_per_days', arguments: {
+                                        'day_id': data['day_id'],
+                                      });
+                                    },
                                     leading: const Image(
                                         image: AssetImage('assets/grain-de-raisin.png')
                                     ),
