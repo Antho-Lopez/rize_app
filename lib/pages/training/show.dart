@@ -168,11 +168,11 @@ class _TrainingShowState extends State<TrainingShow> {
                                 isThreeLine: true,
                                 subtitle: Center(
                                   child: Text(
-                                    '${data['lastFourSessions'][index][0]} Kg lifted ($t ${data['lastFourSessions'][index][2]} Kg compare to previous)',
+                                    '${data['lastFourSessions'][index][0]} Kg lifted ($t ${data['lastFourSessions'][index][2]} Kg)',
                                     style: TextStyle(
                                       fontSize: 14,
                                       color: Color(lessOrMore),
-                                      fontFamily: 'AgrandirRegular',
+                                      fontFamily: 'AgrandirHeavy',
                                     ),
                                   ),
                                 ),
@@ -276,121 +276,6 @@ class _TrainingShowState extends State<TrainingShow> {
                         }
                     ),
 
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: const [
-                          Text(
-                            'Triceps',
-                            style: TextStyle(
-                              fontSize: 20,
-                              letterSpacing: 2,
-                              color: Colors.white,
-                              fontFamily: 'AgrandirHeavy',),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Flexible(
-                            fit: FlexFit.tight,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 8),
-                              child: Container(
-                                padding: const EdgeInsets.all(4.0),
-                                decoration: const BoxDecoration(
-                                  border: Border(
-                                    bottom: BorderSide(width: 1.0, color: Colors.white),
-                                  ),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: const [
-                                    Text(
-                                      'Extension poulie corde',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        letterSpacing: 2,
-                                        color: Colors.white,
-                                        fontFamily: 'AgrandirRegular',
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            )
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Flexible(
-                            fit: FlexFit.tight,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 8),
-                              child: Container(
-                                padding: const EdgeInsets.all(4.0),
-                                decoration: const BoxDecoration(
-                                  border: Border(
-                                    bottom: BorderSide(width: 1.0, color: Colors.white),
-                                  ),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: const [
-                                    Text(
-                                      'Barre au front',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        letterSpacing: 2,
-                                        color: Colors.white,
-                                        fontFamily: 'AgrandirRegular',
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            )
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Flexible(
-                            fit: FlexFit.tight,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 8),
-                              child: Container(
-                                padding: const EdgeInsets.all(4.0),
-                                decoration: const BoxDecoration(
-                                  border: Border(
-                                    bottom: BorderSide(width: 1.0, color: Colors.white),
-                                  ),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: const [
-                                    Text(
-                                      'Développé couché',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        letterSpacing: 2,
-                                        color: Colors.white,
-                                        fontFamily: 'AgrandirRegular',
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            )
-                        ),
-                      ],
-                    ),
                     const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -409,7 +294,7 @@ class _TrainingShowState extends State<TrainingShow> {
                                 ),
                               ),
                               onPressed:() {
-                                Navigator.pushNamed(context, '/sessions_index');
+
                               },
                               child: Card(
                                 color: const Color(myRed),

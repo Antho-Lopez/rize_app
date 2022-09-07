@@ -159,7 +159,7 @@ class _TrainingsState extends State<Trainings> {
                                 ),
                               ),
                               onPressed:() {
-                                Navigator.pushNamed(context, '/weight');
+
                               },
                               child: const Card(
                                 color: Color(myBlue),

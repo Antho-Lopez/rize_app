@@ -15,7 +15,6 @@ class _NutritionsState extends State<Nutritions> {
   Widget build(BuildContext context) {
 
     data = data.isNotEmpty ? data : ModalRoute.of(context)?.settings.arguments as Map;
-    print(data['nutritions']);
     List day = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     List iconsMeal = ['canneberge.png', 'figure.png', 'grain-de-raisin.png', 'grenade.png', 'orange.png', 'pasteque.png', 'poire.png'];
     const myGreen = 0xff0E604F;
@@ -216,7 +215,7 @@ class _NutritionsState extends State<Nutritions> {
           ],
         ),
       ),
-      backgroundColor: Color(bgblack),
+      backgroundColor: Colors.white12,
 
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(

@@ -21,7 +21,7 @@ class _SessionsIndexState extends State<SessionsIndex> {
         elevation: 0,
         leading: BackButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/home');
+              Navigator.pushNamed(context, '/');
             }),
         backgroundColor: Colors.transparent,
       ),
@@ -217,7 +217,7 @@ class _SessionsIndexState extends State<SessionsIndex> {
                                 ),
                               ),
                               onPressed:() {
-                                Navigator.pushNamed(context, '/home');
+                                Navigator.pushNamed(context, '/');
                               },
                               child: Card(
                                 color: const Color(myBlue),

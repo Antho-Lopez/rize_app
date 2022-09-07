@@ -15,7 +15,6 @@ class _MealIndexState extends State<MealIndex> {
   Widget build(BuildContext context) {
 
     data = data.isNotEmpty ? data : ModalRoute.of(context)?.settings.arguments as Map;
-    print(data);
     const myGreen = 0xff0E604F;
     const triangleGrey = 0xff444444;
 
@@ -100,7 +99,7 @@ class _MealIndexState extends State<MealIndex> {
                         Flexible(
                           fit: FlexFit.tight,
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
                             child: ListView.builder(
                                 scrollDirection: Axis.vertical,
                                 shrinkWrap: true,
@@ -111,8 +110,8 @@ class _MealIndexState extends State<MealIndex> {
                                     child: Card(
                                       child: ListTile(
                                         onTap:() {
-                                          Navigator.pushReplacementNamed(context, '/loading_meals_per_days', arguments: {
-                                            'day_id': index + 1,
+                                          Navigator.pushReplacementNamed(context, '/loading_meal_show', arguments: {
+                                            'meal_id': data['meals'][index]['id'],
                                           });
                                         },
                                         shape: const Border(
@@ -172,36 +171,39 @@ class _MealIndexState extends State<MealIndex> {
                       ],
                     ),
                     const SizedBox(height: 2),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Flexible(
-                          fit: FlexFit.tight,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(const Color(myGreen)),
-                              ),
-                              onPressed:() {
-                                Navigator.pushNamed(context, '/weight');
-                              },
-                              child: const Card(
-                                color: Color(myGreen),
-                                elevation: 0,
-                                child: Padding(
-                                    padding: EdgeInsets.symmetric(vertical: 7, horizontal: 17),
-                                    child: Icon(
-                                      Icons.add_circle_outline,
-                                      color: Colors.white,
-                                      size: 40,
-                                    )
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Flexible(
+                            fit: FlexFit.tight,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 8),
+                              child: ElevatedButton(
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all<Color>(const Color(myGreen)),
+                                ),
+                                onPressed:() {
+
+                                },
+                                child: const Card(
+                                  color: Color(myGreen),
+                                  elevation: 0,
+                                  child: Padding(
+                                      padding: EdgeInsets.symmetric(vertical: 7, horizontal: 17),
+                                      child: Icon(
+                                        Icons.add_circle_outline,
+                                        color: Colors.white,
+                                        size: 40,
+                                      )
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     const SizedBox(height: 60)
                   ],

@@ -38,12 +38,7 @@ class _EditDailyMealsState extends State<EditDailyMeals> {
       'removed_meals': removed_meals,
       'day_id': day_id,
     };
-    print(dailyMealsData);
-
     var res = await CallDailyMealsUpdateApi().postDailyMealsData(dailyMealsData);
-    // var body = json.decode(res.body);
-    // print(body);
-
     Navigator.pushNamed(context, '/');
   }
 

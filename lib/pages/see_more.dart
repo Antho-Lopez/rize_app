@@ -93,7 +93,7 @@ class _SeeMoreState extends State<SeeMore> {
                                 backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
                               ),
                               onPressed:() {
-                                Navigator.pushNamed(context, '/weight');
+
                               },
                               child: Container(
                                 padding: const EdgeInsets.all(8.0),
@@ -135,7 +135,7 @@ class _SeeMoreState extends State<SeeMore> {
                                 backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
                               ),
                               onPressed:() {
-                                Navigator.pushNamed(context, '/weight');
+
                               },
                               child: Container(
                                 padding: const EdgeInsets.all(8.0),
@@ -177,7 +177,7 @@ class _SeeMoreState extends State<SeeMore> {
                                 backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
                               ),
                               onPressed:() {
-                                Navigator.pushNamed(context, '/weight');
+
                               },
                               child: Container(
                                 padding: const EdgeInsets.all(8.0),
@@ -219,7 +219,7 @@ class _SeeMoreState extends State<SeeMore> {
                                 backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
                               ),
                               onPressed:() {
-                                Navigator.pushNamed(context, '/weight');
+
                               },
                               child: Container(
                                 padding: const EdgeInsets.all(8.0),
@@ -261,7 +261,7 @@ class _SeeMoreState extends State<SeeMore> {
                                 backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
                               ),
                               onPressed:() {
-                                Navigator.pushNamed(context, '/weight');
+
                               },
                               child: Container(
                                 padding: const EdgeInsets.all(8.0),
@@ -303,7 +303,7 @@ class _SeeMoreState extends State<SeeMore> {
                                 backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
                               ),
                               onPressed:() {
-                                Navigator.pushNamed(context, '/weight');
+
                               },
                               child: Container(
                                 padding: const EdgeInsets.all(8.0),

@@ -15,7 +15,6 @@ class _DailyMealState extends State<DailyMeal> {
   Widget build(BuildContext context) {
 
     data = data.isNotEmpty ? data : ModalRoute.of(context)?.settings.arguments as Map;
-    print(data['day_id']);
     const myGreen = 0xff0E604F;
     const triangleGrey = 0xff444444;
 
@@ -51,7 +50,7 @@ class _DailyMealState extends State<DailyMeal> {
                           child: Text(
                             '${data['day_id']} meals',
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 26,
                               letterSpacing: 2,
                               color: Colors.white,
@@ -76,7 +75,7 @@ class _DailyMealState extends State<DailyMeal> {
                               fontFamily: 'AgrandirHeavy',),
                           ),
                           IconButton(
-                            icon: Icon(Icons.edit_sharp),
+                            icon: const Icon(Icons.edit_sharp),
                             iconSize: 24,
                             color: Colors.white,
                             onPressed: () {
