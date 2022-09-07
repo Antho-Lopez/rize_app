@@ -148,9 +148,23 @@ class _SleepingsState extends State<Sleepings> {
                                   ),
                                 ),
                               ),
-                              onPressed:() {
-                                Navigator.pushNamed(context, '/weight');
-                              },
+                              onPressed: () => showDialog<String>(
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                  title: const Text('"RIZE" Would like to send you notifications'),
+                                  content: const Text('Notifications may includes alerts, sounds, and icon badges. These can be configured in Settings'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(context, 'Don\'t Allow'),
+                                      child: const Text('Cancel'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(context, 'OK'),
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                ),
+                              ),
                               child: Card(
                                 color: const Color(triangleGrey),
                                 elevation: 0,

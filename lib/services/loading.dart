@@ -26,10 +26,12 @@ class _LoadingHomeState extends State<LoadingHome> {
     var today_training;
     int dayId;
 
-    dayId = userData[2]['day_id'];
-    if(userData[2].length == 0){
-      goToSleep = 'Enter your schedule';
-      wakingUp = 'receive notif';
+
+    dayId = userData[5];
+
+    if(userData[2] == null){
+      goToSleep = 'No schedule planned for';
+      wakingUp = 'day';
     } else {
       goToSleep = userData[2]['go_to_sleep'];
       wakingUp = userData[2]['waking_up'];

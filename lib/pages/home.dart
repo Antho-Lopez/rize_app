@@ -284,9 +284,9 @@ class _HomeState extends State<Home> {
                                   padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 10),
                                   child: ListTile(
                                     onTap:() {
-                                      Navigator.pushReplacementNamed(context, '/loading_meals_per_days', arguments: {
+                                      /*Navigator.pushReplacementNamed(context, '/loading_meals_per_days', arguments: {
                                         'day_id': data['day_id'],
-                                      });
+                                      });*/
                                     },
                                     leading: const Image(
                                         image: AssetImage('assets/grain-de-raisin.png')
@@ -294,7 +294,7 @@ class _HomeState extends State<Home> {
                                     title: Text(dayOfTheWeek,
                                       textAlign: TextAlign.center,
                                       style: const TextStyle(
-                                        fontSize: 26,
+                                        fontSize: 22,
                                         letterSpacing: 2,
                                         color: Colors.white,
                                         fontFamily: 'AgrandirHeavy',

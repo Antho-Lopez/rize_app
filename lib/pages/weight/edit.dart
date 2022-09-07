@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../services/api.dart';
 
 class WeightEdit extends StatefulWidget {
   const WeightEdit({Key? key}) : super(key: key);
@@ -10,8 +11,15 @@ class WeightEdit extends StatefulWidget {
 class _WeightEditState extends State<WeightEdit> {
 
   Map data = {};
-
   double currentWeight = 50;
+
+  _updateWeight() async {
+    var weightData= {
+      'current_weight': data['current_weight'],
+    };
+    await CallWeightUpdateApi().postData(weightData);
+    Navigator.pushNamed(context, '/');
+  }
   @override
 
   Widget build(BuildContext context) {
@@ -135,7 +143,7 @@ class _WeightEditState extends State<WeightEdit> {
                                 ),
                               ),
                               onPressed:() {
-                                Navigator.pushNamed(context, '/');
+                                _updateWeight();
                               },
                               child: Card(
                                 color: const Color(myGreen),
