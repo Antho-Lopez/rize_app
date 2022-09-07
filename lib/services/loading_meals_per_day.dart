@@ -31,6 +31,7 @@ class _LoadingMealsPerDayState extends State<LoadingMealsPerDay> {
     // APRES LA RECUPERATION DES DATAS ON LES PASSES EN PARAMS DANS LA ROUTE GRACE A arguments SOUS FORME DE MAP
     Navigator.pushReplacementNamed(context, '/daily_meals', arguments: {
       'meals': meals,
+      'day_id': data['day_id'],
     });
   }
 

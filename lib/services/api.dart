@@ -32,6 +32,23 @@ class CallSleepScheduleUpdateApi{
       headers: _setHeaders(),
     );
   }
+  _setHeaders()=>{
+    'Content-type': 'application/json',
+    'Accept': 'application/json',
+  };
+}
+
+class CallDailyMealsUpdateApi{
+
+  // final String url ="https://blooming-wildwood-76740.herokuapp.com/api/user/1/day/3/update";
+  postDailyMealsData(dailyMealsData) async{
+
+    return await http.post(
+      Uri.parse("https://blooming-wildwood-76740.herokuapp.com/api/user/1/day/${dailyMealsData['day_id']}/update"),
+      body: jsonEncode(dailyMealsData),
+      headers: _setHeaders(),
+    );
+  }
 
   _setHeaders()=>{
     'Content-type': 'application/json',

@@ -265,11 +265,14 @@ class _HomeState extends State<Home> {
                       children: [
                         Flexible(
                             child: ElevatedButton(
-                              style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent)
-                              ),
-                              onPressed:() {
-                                  Navigator.pushNamed(context, '/daily_meals');},
+                                style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent)
+                                ),
+                                onPressed:() {
+                                  Navigator.pushReplacementNamed(context, '/loading_meals_per_days', arguments: {
+                                    'day_id': data['day_id'],
+                                  });
+                                },
                               child: Card(
                                 color: Colors.transparent,
                                 elevation: 0,
@@ -284,9 +287,9 @@ class _HomeState extends State<Home> {
                                   padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 10),
                                   child: ListTile(
                                     onTap:() {
-                                      /*Navigator.pushReplacementNamed(context, '/loading_meals_per_days', arguments: {
+                                      Navigator.pushReplacementNamed(context, '/loading_meals_per_days', arguments: {
                                         'day_id': data['day_id'],
-                                      });*/
+                                      });
                                     },
                                     leading: const Image(
                                         image: AssetImage('assets/grain-de-raisin.png')

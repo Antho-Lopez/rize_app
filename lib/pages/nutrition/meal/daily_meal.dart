@@ -15,7 +15,7 @@ class _DailyMealState extends State<DailyMeal> {
   Widget build(BuildContext context) {
 
     data = data.isNotEmpty ? data : ModalRoute.of(context)?.settings.arguments as Map;
-    print(data);
+    print(data['day_id']);
     const myGreen = 0xff0E604F;
     const triangleGrey = 0xff444444;
 
@@ -46,10 +46,10 @@ class _DailyMealState extends State<DailyMeal> {
                     const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
+                      children: [
                         Flexible(
                           child: Text(
-                            'Monday meals',
+                            '${data['day_id']} meals',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 26,
@@ -79,7 +79,11 @@ class _DailyMealState extends State<DailyMeal> {
                             icon: Icon(Icons.edit_sharp),
                             iconSize: 24,
                             color: Colors.white,
-                            onPressed: () {Navigator.pushNamed(context, '/choose_daily_meal');},
+                            onPressed: () {
+                              Navigator.pushReplacementNamed(context, '/loading_edit_daily_meals', arguments: {
+                                'day_id': data['day_id'],
+                              });
+                            },
                           )
                         ],
                       ),
@@ -101,9 +105,7 @@ class _DailyMealState extends State<DailyMeal> {
                                     child: Card(
                                       child: ListTile(
                                         onTap:() {
-                                          Navigator.pushReplacementNamed(context, '/loading_meals_per_days', arguments: {
-                                            'day_id': index + 1,
-                                          });
+
                                         },
                                         shape: const Border(
                                           bottom: BorderSide(
@@ -156,38 +158,6 @@ class _DailyMealState extends State<DailyMeal> {
                                     ),
                                   );
                                 }
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 2),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Flexible(
-                          fit: FlexFit.tight,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(const Color(myGreen)),
-                              ),
-                              onPressed:() {
-                                Navigator.pushNamed(context, '/weight');
-                              },
-                              child: const Card(
-                                color: Color(myGreen),
-                                elevation: 0,
-                                child: Padding(
-                                    padding: EdgeInsets.symmetric(vertical: 7, horizontal: 17),
-                                    child: Icon(
-                                      Icons.add_circle_outline,
-                                      color: Colors.white,
-                                      size: 40,
-                                    )
-                                ),
-                              ),
                             ),
                           ),
                         ),
